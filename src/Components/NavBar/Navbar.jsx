@@ -1,7 +1,7 @@
 import React from 'react';
-import './Navbar.scss';
+import '../Components.scss';
 import logo from './logo.svg';
-
+import CartWidget from './CartWidget';
 
 
 const Navbar = () => {
@@ -13,15 +13,13 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    <div className="collapse navbar-collapse justify-content-end" id="navBar_R">
-                    <div className="navbar-nav">
-                        <a className="nav-link" href="#">Productos</a>
-                        <a className="nav-link" href="#">Nosotros</a>
-                        <a className="nav-link" href="#">Contacto</a>
-                    </div>
-                    <div className="navbar-nav">
-                        <a className="nav-link" href="#">Log-In</a>
-                        <a className="nav-link" href="#">Carrito</a>
+                    <div className="collapse navbar-collapse justify-content-end " id="navBar_R">
+                    <div className="navbar-nav align-items-center">
+                        <a className="nav-link m-1" href="#">Productos</a>
+                        <a className="nav-link m-1" href="#">Nosotros</a>
+                        <a className="nav-link m-1" href="#">Contacto</a>
+                        <a className="nav-link m-1" href="#">Log-In</a>
+                        <a className="nav-link m-1" href="#"><CartWidget cant={5}/></a>
                     </div>
                     </div>
                 

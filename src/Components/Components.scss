@@ -1,0 +1,23 @@
+@import '../Global/Colors.scss';
+@import '../Global/Fonts.scss';
+
+.logo{
+    width: 10rem;
+}
+
+.navbar-nav{
+    font-size: 1rem;
+    
+    .cartWidget{
+        width: 2rem;
+    }
+}
+
+#cardItemList{
+    width: 15rem;
+    height: 20rem;
+    border: 3px solid $secondary-color;
+    border-radius: 8px;
+}
+
+
