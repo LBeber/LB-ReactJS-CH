@@ -14,10 +14,29 @@
 }
 
 #cardItemList{
-    width: 15rem;
+    width: 12rem;
     height: 20rem;
-    border: 3px solid $secondary-color;
-    border-radius: 8px;
+    border: 1px solid $primary-color;
 }
 
+#cardButton{
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    width: 4rem;
+    height: 2rem;
+}
+
+#addCart{
+    @extend #cardButton;
+    width: 100%;
+}
+
+#addCart:hover, #cardButton:hover{
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: #FFF;
+}
+#cardCount{
+    width: 12rem;
+}
 

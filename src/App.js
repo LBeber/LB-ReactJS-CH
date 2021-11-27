@@ -10,7 +10,7 @@ function App() {
       </header>
       <div className="container-xl">
       <div className="row justify-content-center align-items-center">
-        <ItemListContainer greeting={"Saludando con props"}/>
+        <ItemListContainer />
       </div>
       </div>
     </div>
