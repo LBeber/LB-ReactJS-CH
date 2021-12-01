@@ -1,5 +1,7 @@
-@import '../Global/Colors.scss';
-@import '../Global/Fonts.scss';
+@import '../Global/Scss/Fonts.scss';
+@import '../Global/Scss/Colors.scss';
+
+$rounded: 15px;
 
 .logo{
     width: 10rem;
@@ -20,23 +22,56 @@
 }
 
 #cardButton{
-    border: 1px solid $primary-color;
     color: $primary-color;
     width: 4rem;
     height: 2rem;
 }
 
 #addCart{
-    @extend #cardButton;
+    color: $primary-color;
     width: 100%;
+    height: 2rem;
+    border-radius: 13px;
 }
 
 #addCart:hover, #cardButton:hover{
-    background-color: $primary-color;
+    
     border: 1px solid $primary-color;
-    color: #FFF;
+    
 }
 #cardCount{
-    width: 12rem;
+    width: 100%;
+}
+.cardItem{
+    background: rgba(255, 216, 190, 0.3);
+    border-radius: $rounded;
+    padding: .5rem;
+    transition: all 0.3s ease-in-out;
+    .imgCard{
+        width: 100%;
+        border-radius: $rounded;
+    }
+    
+    .textCard{
+        h5{
+            font-weight: 400;
+        }
+        h4{
+            font-weight: 500;
+        }
+    }   
+    
+}
+.ItemCount{
+    height: 0;
+    transform: scaleY(0);
+    transition: all 0.2s ease-out;
 }
 
+.cardItem:hover{
+    transform: scale(1.05);
+    .ItemCount{
+        height: 5rem;
+        transform: scaleY(1);
+    } 
+}

@@ -1,11 +1,27 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import '../Components.scss'
-import ItemCount from '../ItemCount/ItemCount';
+import ItemList from '../ItemList/ItemList';
+import { getProductos } from '../../Global/Js/productos'
+
 
 const ItemListContainer = () => {
+    const[productos, setProductos] = useState([])
+
+    useEffect(() =>{
+        const listaProductos = getProductos()
+        listaProductos.then(listaProductos =>{
+            setProductos(listaProductos)
+        })
+        
+        return (()=>{
+            setProductos([])
+        })
+    },[])
+
     return (
-        <div className="d-flex flex-column justify-content-end text-center align-items-center" id="cardItemList">
-            <ItemCount initial={1} stock={5} />
+        <div className="container">
+            {/* <ItemCount initial={1} stock={5} /> */}
+            <ItemList productos={productos}/>
         </div>
     )
 }

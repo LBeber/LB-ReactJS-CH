@@ -3,7 +3,7 @@ import '../Components.scss'
 
 const Button = ({label, funcion, param}) => {
     return (      
-            <button className="btn mx-2 p-0 rounded-0" id="cardButton" onClick={funcion} disabled={param}>{label}</button>
+            <button className="btn mx-2 p-0" id="cardButton" onClick={funcion} disabled={param}>{label}</button>
     )
 }
 
@@ -25,17 +25,17 @@ const stop = (cant) => {
 }
 
     return (
-        <div>
-            <div className="fst-italic mb-2">
+        <div className="col-12">
+            {/* <div className="fst-italic mb-2">
                 <small>Stock disponible: {stockDis}</small>
-            </div>
-            <div className="d-flex flex-row justify-content-center mb-2" id="cardCount"> 
+            </div> */}
+            <div className="d-flex flex-row justify-content-center" id="cardCount"> 
                 <Button label="-" funcion={restOne} param={stop(initial)}/>
                 <label className="m-0 p-0 text-center w-100">{count}</label>
                 <Button label="+" funcion={addOne} param={stop(stock)}/>
             </div>
-            <div className="d-flex flex-row justify-content-center mb-2">
-                <button className="btn mx-2 p-0 rounded-0" id="addCart">Agregar al carrito</button>
+            <div className="d-flex flex-row justify-content-center col-12 mt-1">
+                <button className="btn p-0" id="addCart">Agregar al carrito</button>
             </div>
         </div>
     )

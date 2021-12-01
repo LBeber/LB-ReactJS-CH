@@ -8,10 +8,12 @@ function App() {
       <header className="App-header">
         <Navbar/>         
       </header>
-      <div className="container-xl">
+      <div className="container">
       <div className="row justify-content-center align-items-center">
-        <ItemListContainer />
-      </div>
+        <div className="col-10">        
+           <ItemListContainer />
+        </div>
+        </div>
       </div>
     </div>
   );
