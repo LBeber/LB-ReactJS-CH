@@ -2,11 +2,11 @@ import React from 'react'
 import '../Components.scss';
 import ItemCount from '../ItemCount/ItemCount';
 
+
 const Item = ({produc}) => {
-  
+
     return (
-        
-            <div className="col-3 d-flex flex-column justify-content-center align-items-top cardItem m-2">
+            <div className="col-3 d-flex flex-column justify-content-center align-items-top cardItem">
                 <div>
                     <img src={produc.img} alt="" className="img-fluid imgCard"/>
                 </div>
@@ -22,7 +22,6 @@ const Item = ({produc}) => {
                     <ItemCount stock={produc.stock} initial={1}/>
                 </div>
             </div>
-        
     )
 }
 

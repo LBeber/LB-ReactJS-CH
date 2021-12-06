@@ -4,6 +4,7 @@ import ItemList from '../ItemList/ItemList';
 import { getProductos } from '../../Global/Js/productos'
 
 
+
 const ItemListContainer = () => {
     const[productos, setProductos] = useState([])
 
@@ -12,7 +13,6 @@ const ItemListContainer = () => {
         listaProductos.then(listaProductos =>{
             setProductos(listaProductos)
         })
-        
         return (()=>{
             setProductos([])
         })
@@ -20,8 +20,9 @@ const ItemListContainer = () => {
 
     return (
         <div className="container">
-            {/* <ItemCount initial={1} stock={5} /> */}
-            <ItemList productos={productos}/>
+            <div className="row justify-content-center">
+                <ItemList productos={productos}/>
+            </div>
         </div>
     )
 }
