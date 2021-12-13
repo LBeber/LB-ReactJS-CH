@@ -1,27 +1,31 @@
 import React, {useState, useEffect} from 'react'
-import { getProductoDetail } from '../../Global/Js/productos'
+import { useParams } from 'react-router-dom'
+import Loader from '../Loader/Loader'
+import { getProductoById } from '../../Global/Js/productos'
 import ItemDetail from '../ItemDetail/ItemDetail'
 
 
 const ItemDetailContainer = () => {
 
     const [productDetail, setProductDetail] = useState([])
-    const [productRel, setProductRel] = useState([])
+    
+    const {productId} = useParams();
     
         useEffect(()=>{    
-            const ProductoDetail = getProductoDetail()
-            
-            ProductoDetail.then(listProduct =>{
-                setProductRel(listProduct.rel)
-            })
-            ProductoDetail.then(listProduct =>{
+       
+            getProductoById(productId).then(listProduct =>{
                 setProductDetail(listProduct)
             })
-        },[])
+
+            return(() => {
+                setProductDetail()
+            })
+        
+        },[productId])
 
     return (
             <div className="my-5">
-                <ItemDetail productDetail={productDetail} productRel={productRel}/> 
+                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail}/> :<Loader/> }   
             </div>
     )
 }

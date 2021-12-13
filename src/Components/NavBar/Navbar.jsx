@@ -2,23 +2,23 @@ import React from 'react';
 import '../Components.scss';
 import logo from './logo.svg';
 import CartWidget from './CartWidget';
-
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return(
       <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#"><img src={logo} alt="" className="logo ms-2 p-0"/></a>   
+                <Link to={`/`} className="navbar-brand"><img src={logo} alt="" className="logo ms-2 p-0"/></Link>   
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar_R" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse justify-content-end " id="navBar_R">
                     <div className="navbar-nav align-items-center">
-                        <a className="nav-link m-1" href="">Productos</a>
-                        <a className="nav-link m-1" href="">Nosotros</a>
-                        <a className="nav-link m-1" href="">Contacto</a>
-                        <a className="nav-link m-1" href="">Log-In</a>
-                        <a className="nav-link m-1" href=""><CartWidget cant="0"/></a>
+                        <Link className="nav-link m-1" to={'/'}>Productos</Link>
+                        <Link className="nav-link m-1" to={`/category/ofertas`}>Ofertas</Link>
+                        <Link className="nav-link m-1" to={`/category/novedades`}>¡Novedades!</Link>
+                        <Link className="nav-link m-1" to={'#'}>Log-In</Link>
+                        <Link className="nav-link m-1" to={'#'}><CartWidget cant="0"/></Link>
                     </div>
                     </div>
                 
