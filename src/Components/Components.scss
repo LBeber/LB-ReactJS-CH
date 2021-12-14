@@ -20,9 +20,15 @@ $rounded: 15px;
 
 .navbar-nav{
     font-size: 1rem;
-    
     .cartWidget{
         width: 2rem;
+    }
+}
+
+.goCart{
+    #addCart{
+        background-color: $primary-color ;
+        color: #FFF;
     }
 }
 

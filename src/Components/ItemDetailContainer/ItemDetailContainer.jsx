@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import { getProductoById } from '../../Global/Js/productos'
 import ItemDetail from '../ItemDetail/ItemDetail'
+import ItemCount from '../ItemCount/ItemCount'
 
 
 const ItemDetailContainer = () => {
@@ -25,7 +26,7 @@ const ItemDetailContainer = () => {
 
     return (
             <div className="my-5">
-                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail}/> :<Loader/> }   
+                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail} countType={ItemCount}/> :<Loader/> }   
             </div>
     )
 }

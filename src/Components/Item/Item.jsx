@@ -17,7 +17,7 @@ const Item = ({produc}) => {
                 </div>
             </Link>
                 <div className="ItemCount">
-                    <ItemCount stock={produc.stock} initial={1}/>
+                    <ItemCount cant={produc.stock}/>
                 </div>
         </div>
     )
