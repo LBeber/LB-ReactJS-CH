@@ -13,13 +13,13 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse justify-content-end " id="navBar_R">
-                    <div className="navbar-nav align-items-center">
+                    <ul className="navbar-nav align-items-center">
                         <Link className="nav-link m-1" to={'/'}>Productos</Link>
                         <Link className="nav-link m-1" to={`/category/ofertas`}>Ofertas</Link>
                         <Link className="nav-link m-1" to={`/category/novedades`}>¡Novedades!</Link>
                         <Link className="nav-link m-1" to={'#'}>Log-In</Link>
-                        <Link className="nav-link m-1" to={'#'}><CartWidget cant="0"/></Link>
-                    </div>
+                        <Link className="nav-link m-1" to={'/cart'}><CartWidget/></Link>
+                    </ul>
                     </div>
                 
             </div>

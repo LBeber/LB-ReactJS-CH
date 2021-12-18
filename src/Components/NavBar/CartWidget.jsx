@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import cart from './cartwidget.svg';
 import '../Components.scss';
+import CartContext from '../../Context/CartContext/CartContext'
 
-const CartWidget = ({cant}) => {
+const CartWidget = () => {
+
+
+    const { cantTotal } = useContext(CartContext) 
+
+    const cant = cantTotal()
+    
     return (
         <div className="d-flex justify-content-center align-items-center">
                 <img src={cart} alt="" className="m-0 cartWidget"/>

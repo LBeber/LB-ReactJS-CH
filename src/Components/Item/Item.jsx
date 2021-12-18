@@ -1,6 +1,5 @@
 import React from 'react'
 import '../Components.scss';
-import ItemCount from '../ItemCount/ItemCount';
 import { Link } from 'react-router-dom';
 
 const Item = ({produc}) => {
@@ -13,12 +12,9 @@ const Item = ({produc}) => {
                 </div>
                 <div className="mt-3 px-1 textCard">
                         <h5>{produc.nombre}</h5>
-                        <h4>{produc.precio}</h4>
+                        <h4>${(produc.precio).toFixed(2)}</h4>
                 </div>
             </Link>
-                <div className="ItemCount">
-                    <ItemCount cant={produc.stock}/>
-                </div>
         </div>
     )
 }

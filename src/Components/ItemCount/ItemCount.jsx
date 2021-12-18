@@ -2,20 +2,24 @@ import React, {useState} from 'react'
 import '../Components.scss'
 import { Link } from 'react-router-dom'
 
-const GoCart = ({action, cant}) => {
+
+const GoCart = () => {
     
     return (
-        <div className="text-center col-12 goCart">
-            <Link className="btn p-0" id="addCart" to={'/cart'}>Ir al carrito</Link>
+        <div className="row justify-content-center">
+                <Link className="btn my-1" id="viewProduct" to={'/'}>Ver mas productos</Link> 
+            <div className='text-center goCart col-8'>
+                <Link className="btn my-1" id="goCart" to={'/cart'}>Ir al carrito</Link>
+            </div>
         </div>
     )
 }
 
 
-const CountButton = ({action, cant}) => {
+const CountButton = ({cant, action}) => {
 
     const [count, setCount] = useState(1)
-
+    
     const addOne = () => {
         if (count < cant){
             setCount(count + 1);
@@ -31,29 +35,25 @@ const CountButton = ({action, cant}) => {
     const stop = (cant) => {
         return (count === cant) ?true :false
     }
-    
-    return(
-        <div>
-            <div className="d-flex flex-row justify-content-center" id="cardCount"> 
-                <button className="btn mx-2 p-0 cardButton" onClick={restOne} disabled={stop(1)}>-</button>
 
-                <label className="m-0 p-0 text-center w-100">{count}</label>
-                
-                <button className="btn mx-2 p-0 cardButton" onClick={addOne} disabled={stop(cant)}>+</button>
+    return(
+        <div className='row justify-content-center align-items-center'>
+            <div className="text-center col-10" id="cardCount"> 
+                <button className="btn mx-2 p-0 cardButton rounded-circle" onClick={restOne} disabled={stop(1)}>-</button>
+                    <label className="m-0 p-0 text-center col-4">{count}</label>
+                <button className="btn mx-2 p-0 cardButton rounded-circle" onClick={addOne} disabled={stop(cant)}>+</button>
             </div>
-            <div className="d-flex flex-row justify-content-center col-12 mt-1">
+            <div className="justify-content-center col-8 mt-1">
                 <button className="btn p-0" id="addCart" onClick={() => action(count)}>Agregar al carrito</button>
             </div>
         </div>
     )
 }
 
-
-
 const ItemCount = ({cant, action, inputType = 'CountButton'}) => {
 
     const Count = inputType === 'CountButton' ?CountButton :GoCart
-    
+
     return (
         <Count cant={cant} action={action}></Count>
     )

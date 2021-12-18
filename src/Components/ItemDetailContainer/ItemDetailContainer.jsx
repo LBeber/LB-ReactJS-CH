@@ -26,7 +26,7 @@ const ItemDetailContainer = () => {
 
     return (
             <div className="my-5">
-                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail} countType={ItemCount}/> :<Loader/> }   
+                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail} countType={ItemCount}/> :<Loader/> }
             </div>
     )
 }

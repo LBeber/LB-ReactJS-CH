@@ -31,7 +31,7 @@ const ItemListContainer = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                {productos.length !== 0 ?<ItemList productos={productos}/> :<Loader/>}
+            {productos.length !== 0 ? <ItemList productos={productos}/> :<Loader/> }
             </div>
         </div>
     )
