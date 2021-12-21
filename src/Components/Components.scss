@@ -35,6 +35,12 @@ $rounded: 15px;
     color: #FFF;
 }
 
+.nav-link:hover{
+    transform: translateY(-0.1rem);
+    transition: all .1s ease-out;
+}
+
+
 #viewProduct{
     color: $primary-color;
     height: 2rem;
@@ -121,10 +127,6 @@ $rounded: 15px;
     0px 0px 2.1px rgba(0, 0, 0, 0.035),
     0px 0px 17px rgba(0, 0, 0, 0.07)
     ;
-    .ItemCount{
-        height: 5rem;
-        transform: scaleY(1);
-    }
 }
 
 .itemDetail{
@@ -132,21 +134,21 @@ $rounded: 15px;
     box-shadow:
     0px 0px 2.1px rgba(0, 0, 0, 0.035),
     0px 0px 17px rgba(0, 0, 0, 0.07);
-    z-index: 0;
     img{
         border-radius: $rounded;
     }
 }
 
-.App{  
+.bgBody{  
     display: block;
+    overflow: hidden;
     min-height: 100vh;
     width: 100%;
     position: relative;
     z-index: 0;
 }
 
-.App::after{
+.bgBody::after{
     background-color: $background-color;
     background-repeat: repeat;
     opacity: 1;
@@ -251,4 +253,6 @@ $rounded: 15px;
     width: 100%;
 }
 
-
+.App{
+    font-family: $font-primary;
+}

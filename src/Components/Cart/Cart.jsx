@@ -7,7 +7,7 @@ import { Trash} from 'react-bootstrap-icons';
 export const CartItem = ({CartDetail}) => {
 
     const { deleteProduct } = useContext(CartContext)
-
+   
     const deleteItem = (i) => {
         deleteProduct(i)
     }
@@ -20,7 +20,7 @@ export const CartItem = ({CartDetail}) => {
     const precio = getPrecio()
 
     return (
-        <article className="row col-8 justify-content-center align-items-center px-0 py-2 my-0">
+        <article className="animate__animated animate__fadeInUpBig row col-8 justify-content-center align-items-center px-0 py-2 my-0">
             <div className='row col-10 offset-1 justify-content-between itemDetail align-items-center'>
                 <div className='col-3 my-1 p-1'>
                     <img className="w-100" src={CartDetail?.img} alt="" />
@@ -67,12 +67,12 @@ const CartFooter = () =>{
 
     return (
        
-            <div className='row col-12 footerCartBg'>
+            <div className='row col-12 footerCartBg mb-2'>
                 <div className='row col-3 justify-content-center align-items-center footerCart'>
                     <div className='col-2 removeAllDiv'>         
                        <button className='removeAll' onClick={() => removeAll()}>Vaciar carrito</button>
-                   </div>
-                    <div className='col-12'>    
+                    </div>
+                    <div>
                         <h3>{precioTotal}</h3>
                     </div>
                    <div className='col-2 checkOutDiv'>         
@@ -90,7 +90,7 @@ const Cart = () =>{
 
     return (
         <section className='cart'>
-            {addItem.map(item=><CartItem key={item.id} CartDetail={item}/> )}
+            {addItem.map(item=><CartItem key={item.id} CartDetail={item}/>)}
             <CartFooter/>
         </section>
     )

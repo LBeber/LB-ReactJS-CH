@@ -5,11 +5,10 @@ import CartContext from '../../Context/CartContext/CartContext'
 
 const CartWidget = () => {
 
-
     const { cantTotal } = useContext(CartContext) 
 
-    const cant = cantTotal()
-    
+    const cant =  cantTotal()
+
     return (
         <div className="d-flex justify-content-center align-items-center">
                 <img src={cart} alt="" className="m-0 cartWidget"/>

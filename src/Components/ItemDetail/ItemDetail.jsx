@@ -24,7 +24,7 @@ const ItemDetail = ({productDetail}) => {
     }
 
     return (
-        <div className="row itemDetail py-3">
+        <div className="itemDetail py-3">
             <div className="col-12 row justify-content-center">
                     <div className="col-12 col-sm-12 col-lg-6">
                         <img src={productDetail?.img} alt="" className="img-fluid"/>

@@ -15,16 +15,18 @@ function App() {
           <header className="App-header">
             <Navbar/>         
           </header>
-          <div className="container">
-            <div className="row justify-content-center align-items-center">
+          <div className='bgBody'>
+            
+            <div className="container">
               <Routes>
                 <Route exact path='/' element={<ItemListContainer />} />
                 <Route exact path='/category/:categoryId' element={<ItemListContainer />}/>
                 <Route exact path='/detail/:productId' element={<ItemDetailContainer />}/> 
                 <Route exact path='/cart' element={<Cart/>} />     
-            </Routes> 
+              </Routes> 
             </div> 
-          </div>
+            </div>            
+          
         </Router>
       </CartContextProvider>
   </div>

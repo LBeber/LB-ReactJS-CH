@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return(
-      <nav className="navbar navbar-expand-lg navbar-light">
-            <div className="container-fluid">
+
+     
+
+     <nav className="navbar navbar-expand-md navbar-light">
+            
                 <Link to={`/`} className="navbar-brand"><img src={logo} alt="" className="logo ms-2 p-0"/></Link>   
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar_R" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -22,8 +25,10 @@ const Navbar = () => {
                     </ul>
                     </div>
                 
-            </div>
-        </nav>
+          
+        </nav> 
+
+    
     )
 }
 
