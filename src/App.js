@@ -1,5 +1,5 @@
 import './App.css';
-import Navbar from './Components/NavBar/Navbar';
+import NavBar from './Components/NavBar/Navbar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
@@ -13,7 +13,7 @@ function App() {
       <CartContextProvider>
         <Router>
           <header className="App-header">
-            <Navbar/>         
+            <NavBar/>         
           </header>
           <div className='bgBody'>
             

@@ -8,6 +8,7 @@ export const CartContextProvider = ({children}) => {
     const [total, setTotal] = useState(0)
 
     const addProduct = (item) => {
+        
         if(!checkIsAdded(item.id)){
             addItem.forEach((i, val) => {
                 
@@ -61,7 +62,7 @@ export const CartContextProvider = ({children}) => {
                     getTotalPrice,
                     addProduct, 
                     deleteProduct,
-                    deleteAll,
+                    deleteAll
                     }}
         >
             {children}

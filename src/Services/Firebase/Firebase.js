@@ -2,12 +2,12 @@ import * as firebase from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDTSqOqRkjUUewLSxDs0wZbDUpzqNLroqw",
-    authDomain: "ceramic-room.firebaseapp.com",
-    projectId: "ceramic-room",
-    storageBucket: "ceramic-room.appspot.com",
-    messagingSenderId: "7196003385",
-    appId: "1:7196003385:web:36f89c70c470eacd0e91e8"
+    apiKey: process.env.RACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId
   };
 
 

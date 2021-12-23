@@ -16,7 +16,8 @@ const ItemDetail = ({productDetail}) => {
     
     const sumarItem = (count) => {
         if (productDetail.stock >= count){
-            const value = {...productDetail, cant: count}
+            let subTotal = productDetail.precio * count
+            const value = {...productDetail, cant: count, subTotal}
             productDetail.stock = productDetail.stock - count
             addProduct(value)
             setTypeCount('GoCart')
