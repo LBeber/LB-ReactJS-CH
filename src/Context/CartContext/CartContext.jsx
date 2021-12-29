@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 
 const Context = React.createContext()
 
-
 export const CartContextProvider = ({children}) => {
     const [addItem, setAddItem] = useState([])
     const [total, setTotal] = useState(0)
+    const [dataOrder, setDataOrder] = useState(false)
 
     const addProduct = (item) => {
         
@@ -53,11 +53,17 @@ export const CartContextProvider = ({children}) => {
         return precioTotal.toFixed(2)
     }
 
+    const DataCart = (value) =>{
+        setDataOrder(value)
+    }
+
     return (
         <Context.Provider
         value=  {{  
                     total,
                     addItem,
+                    dataOrder,
+                    DataCart,
                     cantTotal,
                     getTotalPrice,
                     addProduct, 

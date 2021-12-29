@@ -1,10 +1,18 @@
 import React, { useContext} from 'react'
+import { Link } from 'react-router-dom';
 import '../Components.scss'
 import CartContext from '../../Context/CartContext/CartContext'
-import { Trash} from 'react-bootstrap-icons';
+import UserContext from '../../Context/UserContext/UserContext';
+import { UserContextProvider } from '../../Context/UserContext/UserContext';
+import Payment from './Payment';
+import { Bag, Trash, Truck} from 'react-bootstrap-icons';
+import { Col, Row } from 'react-bootstrap';
+
+import { addDoc, collection, writeBatch, doc, getDoc } from 'firebase/firestore'
+import { db } from '../../Services/Firebase/Firebase'
 
 
-export const CartItem = ({CartDetail}) => {
+const CartItem = ({CartDetail}) => {
 
     const { deleteProduct} = useContext(CartContext)
    
@@ -13,30 +21,30 @@ export const CartItem = ({CartDetail}) => {
     }
    
     return (
-        <article className="animate__animated animate__fadeInUpBig row col-8 justify-content-center align-items-center px-0 py-2 my-0">
-            <div className='row col-10 offset-1 justify-content-between itemDetail align-items-center'>
-                <div className='col-3 my-1 p-1'>
-                    <img className="w-100" src={CartDetail?.img} alt="" />
+        <article className="animate__animated animate__fadeInUpBig row col-12 justify-content-center align-items-center p-0 my-2">
+            <div className='row col-11 justify-content-between itemDetail align-items-center p-1'>
+                <div className='col-3 imgCartItem p-0'>
+                    <img src={CartDetail?.img} alt="" />
                 </div>
-                <div className='row col-6 align-items-center'>
-                    <div className='col-8 text-left'>
+                <div className='row col-6 align-items-center p-1'>
+                    <div className='col-6 text-left'>
                         <h4>
                            {CartDetail?.nombre}
                         </h4>
                         <small className='cantCart fst-italic'>
-                            Precio: ${CartDetail?.precio.toFixed(2)}
+                            ${CartDetail?.precio.toFixed(2)}
                         </small>
                     </div>
-                    <div className='col-4 text-center'>
-                        <span>Cantidad</span>
+                    <div className='col-6 text-center'>
+                        <small>Cantidad</small>
                         <h5 className='text-center'>{CartDetail?.cant}</h5>
                     </div>
                 </div>
-                <div className='col-3 text-center'>
-                    <span>Subtotal</span>
-                    <h4 className='text-center'>
+                <div className='col-3 text-center p-1'>
+                    <small>Subtotal</small>
+                    <h5 className='text-center'>
                         ${CartDetail?.subTotal.toFixed(2)}
-                    </h4>
+                    </h5>
                 </div>
             </div>
             <div className='col-1' id="deleteBtn">
@@ -45,14 +53,15 @@ export const CartItem = ({CartDetail}) => {
                 </button>
             </div>
         </article>
+    
         )
     }
 
-
 const CartFooter = () =>{
-    const { getTotalPrice, deleteAll, addItem} = useContext(CartContext)
+
+    const { getTotalPrice, deleteAll, addItem, DataCart} = useContext(CartContext)
     
-    
+    const { user, changeNotification } = useContext(UserContext)
 
     const precioTotal = addItem.length !== 0 ?`Total: $ ${getTotalPrice()}` :'Carrito vacio'
 
@@ -60,50 +69,153 @@ const CartFooter = () =>{
         deleteAll()
     }  
 
-    const goCheckOut = () =>{
+    const batch = writeBatch(db)
+    const noStock = []
 
-        const getDataCart = 
+    
+    const checkData = Object.values(user).every(value => { //Valida que esté
+        if(value !== null){
+            return true
+        }    
+        else{
+            return false
+        }
+    })
+    
+
+    const checkOut = () =>{ 
+        if (checkData){
+            orderConfirm()
+        }
+        else{
+            let alert = 'Debe completar los datos de envío'
+            changeNotification(alert)
+        }
+    }
+
+    const orderConfirm = () =>{
+
+        const getDataCart =
             {
-                buyer:{
-                    name:'Buyer',
-                    phone:'111111',
-                    email:'example@example.com'
-                },
+                buyer: user,
                 items: addItem,
                 total: precioTotal
-            }
+            }     
 
-        console.log(getDataCart)
+        getDataCart.items.forEach((item) => {
+            (async()=>{
+                try{
+                    const product = await getDoc(doc(db, 'products', item.id))
+                    
+                    if (product.data().stock >= item.cant){
+                        batch.update(doc(db, 'products', item.id),{
+                            stock: product.data().stock - item.cant
+                        })
+                    
+                    }
+                    else{
+                        noStock.push({id: item.id, ...item.data()})
+                    }
+                }
+                catch{
+                    console.log('Error');
+                }
+            })()
+            
+        });
+
+        if (noStock.length === 0){
+            (async ()=>{
+                try{
+                   const added = await addDoc(collection(db, 'orders'), getDataCart)
+                   batch.commit().then(()=>{
+                        changeNotification(added.id) //Id de compra
+                   })
+                }
+                catch{
+                    console.log('Error en update');
+                }
+            })()
+        }
+        
+        DataCart(true);
     }
 
     return (
-       
-            <div className='row col-12 footerCartBg mb-2'>
-                <div className='row col-3 justify-content-center align-items-center footerCart'>
-                    <div className='col-2 removeAllDiv'>         
-                       <button className='removeAll' onClick={() => removeAll()}>Vaciar carrito</button>
-                    </div>
-                    <div>
-                        <h3>{precioTotal}</h3>
-                    </div>
-                   <div className='col-2 checkOutDiv'>         
-                       <button className='checkOut' onClick={goCheckOut(addItem)}>Finalizar compra</button>
-                   </div>
+        <div className='row col-12'>
+            <div className='footerCartBg'>
+                <div className='col-2 removeAllDiv'>         
+                    <button className='removeAll' onClick={() => removeAll()}>Vaciar carrito</button>
                 </div>
+                <div className='footerCartPrice col-4'>
+                    <h3>{precioTotal}</h3>
+                </div>
+                <div className='col-2 checkOutDiv'>         
+                    <button className='checkOut' onClick={() => checkOut()}>Finalizar compra</button>
+                </div>  
             </div>
+        </div>
         
+    )
+}
+const DataOrderDetail = () =>{
+
+    const { notification, user } = useContext(UserContext)
+    const { DataCart } = useContext(CartContext)
+
+    const goHome = () =>{
+        DataCart(false)
+    }
+
+    return(
+        <Row className='order'>
+            <Col sm="8" className='orderDetails'>
+                <h6>¡Gracias por tu compra {user.name}!</h6>
+                <Col className='descripOrder'>
+                    Estamos trabajando en el pedido, podrás hacer el seguimimiento del envío dentro de las próximas 24hs con el siguiente número de pedido
+                </Col>
+                <span className='idOrder'>{notification}</span>
+            </Col>
+            <Col sm="8" className='goHome'>
+                <Link to={'/'} onClick={() => goHome()} className='btnGoHome'>Ver mas productos</Link>
+            </Col>
+        </Row>
+    )
+}
+
+const CartOrder = () =>{
+
+    const { addItem } = useContext(CartContext)
+    
+    return (
+        
+            <Row className='cart'>
+                <Col sm="6" className='titleCart'>
+                    <p>Detalle del carrito<Bag className='ms-2'/></p>
+                    {addItem.map(item=><CartItem key={item.id} CartDetail={item}/>)}
+                </Col>
+                <Col sm="6" className='titleCart'>
+                    <p>Datos de envío<Truck className='ms-2'/></p>
+                    <Payment/>
+                </Col>
+                <Col>
+                    <CartFooter/>   
+                </Col>
+            </Row>
     )
 }
 
 const Cart = () =>{
+    const { dataOrder } = useContext(CartContext)
 
-    const { addItem } = useContext(CartContext)
+    const Cart =  (dataOrder !== true)
+                    ?CartOrder
+                    :DataOrderDetail
 
     return (
-        <section className='cart'>
-            {addItem.map(item=><CartItem key={item.id} CartDetail={item}/>)}
-            <CartFooter/>
-        </section>
+        <UserContextProvider>
+            <Cart/>
+        </UserContextProvider>
     )
 }
 

@@ -7,9 +7,7 @@ import {db} from '../../Services/Firebase/Firebase'
 import { getDoc, doc} from 'firebase/firestore'
 
 const ItemDetailContainer = () => {
-
     const [productDetail, setProductDetail] = useState([])
-    
     const {productId} = useParams();
     
         useEffect(()=>{

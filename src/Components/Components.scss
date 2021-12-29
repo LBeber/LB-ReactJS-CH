@@ -133,7 +133,7 @@ $rounded: 15px;
     }
 }
 
-.bgBody{  
+.App{  
     display: block;
     overflow: hidden;
     min-height: 100vh;
@@ -142,7 +142,7 @@ $rounded: 15px;
     z-index: 0;
 }
 
-.bgBody::after{
+.App::after{
     background-color: $background-color;
     background-repeat: repeat;
     opacity: 1;
@@ -162,7 +162,7 @@ $rounded: 15px;
     border: none;
     height: 2.5rem;
     width: 2.5rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     transition: all 0.2s ease-out;
 }
 
@@ -203,29 +203,20 @@ $rounded: 15px;
     transition: all 0.2s ease-out;
 }
 
-.removeAllDiv{
-    position: absolute;
-    left: 15%;
-}
-
-.checkOutDiv{
-    position: absolute;
-    right: 15%;
-}
-
 .footerCartBg{
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: fixed;
-        height: 5em;
-        bottom: 0rem;
-        background-color: $background-color;              
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    height: 5em;
+    position: absolute;
+    left: 0;
+    background-color: $background-color;
+    bottom: .5rem;              
 }
 
-.footerCart{
+.footerCartPrice{
     background-color: $background-color-item;
     border-radius: $rounded;
     height: 4rem;
@@ -243,6 +234,7 @@ $rounded: 15px;
     flex-flow: row wrap;
     justify-content: center;
     margin-bottom: 6rem;
+    align-items: flex-start;
 }
 
 .CountButtonCart{
@@ -254,3 +246,79 @@ $rounded: 15px;
 .App{
     font-family: $font-primary;
 }
+
+.formCheckout{
+    @extend .itemDetail;
+    padding: 1rem;
+}
+
+.formHeader{
+    font-size: 1.3rem;
+}
+.cartDetailText{
+    font-size: .9rem;
+}
+
+.imgCartItem{
+    padding: none;
+    img{
+        padding: 0rem;
+        width: 100%;
+    }
+}
+
+.titleCart{
+    p{
+        margin-top: 1rem;
+        font-size: 1.3rem;
+    }
+}
+
+.notification{
+    text-align: center;
+    margin-top: 1rem;
+    h6{
+        font-size: 1rem;
+    }
+}
+
+.order{
+    text-align: center;
+    justify-content: center;
+    flex-flow: row;
+
+    .orderDetails{
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        margin-top: 1rem;
+    }
+
+    .descripOrder{
+        margin-top: 2rem;
+    }
+
+    .idOrder{
+        font-size: 2rem;
+        font-weight: 500;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    h6{
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .btnGoHome{
+        margin-top: 1rem;
+        @extend .checkOut;
+        text-decoration: none;
+        font-size: 1rem;
+        border-radius: 10rem;
+        padding: .8rem;
+        transition: all 0.2s ease-out;
+    }
+}
+
+    
