@@ -10,8 +10,8 @@
 
 - [Instalación](#Instalación)
 	- [Componentes](#Componentes)
-- [Conectando Firebase](#Conectando Firebase)
-	- [Carga de productos](#Carga de productos)
+- [Firebase](#Firebase)
+	- [Productos](#Productos)
 	- [Órdenes](#Órdenes)
 	- [Peticiones](#Peticiones)
 
@@ -51,7 +51,7 @@
 	- UserContext
 
 ------------
-###Conectando Firebase
+###Firebase
 
 Archivo de Firebase:
 
@@ -59,7 +59,7 @@ Archivo de Firebase:
 
 Dentro del archivo están la conexión con Firebase mediante variables de entorno, las cuales están escritas en un archivo `.env`
 
-####Carga de productos
+####Productos
 
 Datos requeridos para la carga de productos:
 
@@ -94,26 +94,26 @@ Los datos que guarda son:
 ```javascript
  Id: (id Automático de Firestore)
 {
-		'buyer': 	{									 //(Obj / Datos del cliente)
-					'address' (String / Dirección)
-					'email' (String / Email)
-					'name': (String / Nombre)
-					'phone':  (String / Número de teléfono)
-		}
+	'buyer': 	{									 //(Obj / Datos del cliente)
+		'address' (String / Dirección)
+		'email' (String / Email)
+		'name': (String / Nombre)
+		'phone':  (String / Número de teléfono)
+	}
 		
-		'items': [{								//(Array / Cantidad de productos)
-					'cant': (Number / Unidades del mismo producto)
-					'Id': (id automáticamente por Firestore)
-					'categoria': (String / Categoría a la que pertenece)
-					'descrip':  (String / Breve descripción del producto)
-					'img': (String / Ruta a la imagen)
-					'nombre': (String / Nombre del producto)
-					'precio': (Number / precio del producto)
-					'stock' (Number / Cantidad de unidades en stock)
-					'subTotal' (Number / Subtotal del producto)
-			}]
-		
-		'total':  							//(String / Total de la compra)
+	'items': [{								//(Array / Cantidad de productos)
+		'cant': (Number / Unidades del mismo producto)
+		'Id': (id automáticamente por Firestore)
+		'categoria': (String / Categoría a la que pertenece)
+		'descrip':  (String / Breve descripción del producto)
+		'img': (String / Ruta a la imagen)
+		'nombre': (String / Nombre del producto)
+		'precio': (Number / precio del producto)
+		'stock' (Number / Cantidad de unidades en stock)
+		'subTotal' (Number / Subtotal del producto)
+	}]
+	
+	'total':  							//(String / Total de la compra)
 
 }
 ```
