@@ -6,19 +6,21 @@
 
 ------------
 
-###Guía para el desarrollador
+### Guía para el desarrollador
 
 - [Instalación](#Instalación)
 	- [Componentes](#Componentes)
+	- [Logo](#Logo)
 - [Firebase](#Firebase)
 	- [Productos](#Productos)
+		- [Imágenes](#Imágenes)
 	- [Órdenes](#Órdenes)
 	- [Peticiones](#Peticiones)
 
 
 
 ------------
-###Instalación
+### Instalación
 
 
 -	 Instalar todas las dependencias utilizadas con el comando:
@@ -57,9 +59,13 @@ Archivo de Firebase:
 
 `src/services/Firebase/Firebase.js`
 
-Dentro del archivo están la conexión con Firebase mediante variables de entorno, las cuales están escritas en un archivo `.env`
+Dentro del archivo está la conexión con Firebase, deberás copiar las credenciales y alojarlas en un archivo  `.env` o directamente en el archivo Firebase.js
 
-####Productos
+
+------------
+
+
+#### Productos
 
 Datos requeridos para la carga de productos:
 
@@ -83,7 +89,14 @@ Datos requeridos para la carga de productos:
 | id     | String | nombre de la categoría. Ej: 'Novedades' |
 | categorie      | String        |   Nombre que aparecerá en NavBar |
 
-####Órdenes
+##### Imágenes
+Si se utilizarán elementos multimedia como imágenes, logos, etc., y los mismos estén dentro de las carpetas del proyecto, se sugiere ubicarlos en  `public/media/` para que la ruta en Firebase sea `../media/imagen.jpg`
+
+
+------------
+
+
+#### Órdenes
 
 La colección correspondiente a las órdenes se genera automáticamente cuando el usuario carga finaliza una compra.
 
@@ -94,14 +107,14 @@ Los datos que guarda son:
 ```javascript
  Id: (id Automático de Firestore)
 {
-	'buyer': 	{									 //(Obj / Datos del cliente)
+	'buyer': {		//(Obj / Datos del cliente)
 		'address' (String / Dirección)
 		'email' (String / Email)
 		'name': (String / Nombre)
 		'phone':  (String / Número de teléfono)
 	}
 		
-	'items': [{								//(Array / Cantidad de productos)
+	'items': [{		//(Array / Cantidad de productos)
 		'cant': (Number / Unidades del mismo producto)
 		'Id': (id automáticamente por Firestore)
 		'categoria': (String / Categoría a la que pertenece)
@@ -113,12 +126,16 @@ Los datos que guarda son:
 		'subTotal' (Number / Subtotal del producto)
 	}]
 	
-	'total':  							//(String / Total de la compra)
+	'total':  		//(String / Total de la compra)
 
 }
 ```
 
-####Peticiones
+
+------------
+
+
+#### Peticiones
 
 La función ** getItems**  trae todos los productos cargados en la categoría **products**
 
@@ -126,3 +143,14 @@ La función **getItemById** trae el producto seleccionado para ver detalle
 
 La función **updateProduct** genera un Update de la colección y si hay stock genera un nuevo documento en la categoría  **orders**
 
+
+------------
+
+Diseñado y desarrollado por
+
+>**Lucas Beber - UX/UI Designer | Frontend  developer**
+
+> - [Linkedin](https://www.linkedin.com/in/lucas-beber/)
+> - [Behance](https://www.behance.net/Lucas-Beber)
+
+>*Todos los derechos reservados © 2022*
