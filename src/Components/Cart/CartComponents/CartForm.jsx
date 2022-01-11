@@ -1,16 +1,15 @@
 import React, {useContext} from 'react'
-import '../Components.scss'
-import UserContext from '../../Context/UserContext/UserContext'
+import '../../Components.scss'
+import UserContext from '../../../Context/UserContext/UserContext'
 import {
     Form,
     Col,
     Row
 } from 'react-bootstrap'
     
-
 const Payment = () => {
 
-const {addName, addPhone, addEmail, addAddress, notification} = useContext(UserContext)  
+    const {addName, addPhone, addEmail, addAddress, notification} = useContext(UserContext)  
 
     const getName = (e) =>{
         let name = e.target.value

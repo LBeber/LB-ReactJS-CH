@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
+import { UserContextProvider } from '../UserContext/UserContext';
 
 const Context = React.createContext()
 
 export const CartContextProvider = ({children}) => {
     const [addItem, setAddItem] = useState([])
     const [total, setTotal] = useState(0)
-    const [dataOrder, setDataOrder] = useState(false)
+    const [orderState, setOrderState] = useState(false)
+
+    
 
     const addProduct = (item) => {
         
@@ -53,26 +56,28 @@ export const CartContextProvider = ({children}) => {
         return precioTotal.toFixed(2)
     }
 
-    const DataCart = (value) =>{
-        setDataOrder(value)
+    const order = (value) =>{
+        setOrderState(value)
     }
-
+    
     return (
-        <Context.Provider
-        value=  {{  
-                    total,
-                    addItem,
-                    dataOrder,
-                    DataCart,
-                    cantTotal,
-                    getTotalPrice,
-                    addProduct, 
-                    deleteProduct,
-                    deleteAll
-                    }}
-        >
-            {children}
-        </Context.Provider>
+        <UserContextProvider>
+            <Context.Provider
+            value=  {{  
+                total,
+                addItem,
+                orderState,
+                order,
+                cantTotal,
+                getTotalPrice,
+                addProduct, 
+                deleteProduct,
+                deleteAll
+            }}
+            >
+                {children}
+            </Context.Provider>
+        </UserContextProvider>
     )
 }
 

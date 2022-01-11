@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../Components.scss';
 import logo from './logo.svg';
 import CartWidget from './CartWidget';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {db} from '../../Services/Firebase/Firebase'
 import { collection, getDocs} from 'firebase/firestore'
 import { 
@@ -37,15 +37,16 @@ const NavBar = () => {
 
     return(
 
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="white" expand="lg" className='NavBar'>
             <Container>
                 <Navbar.Brand><Link to={`/`} className="navbar-brand"><img src={logo} alt="" className="logo ms-2 p-0"/></Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
                 <Nav>
-                    <Link className="nav-link m-1" to={'/'}>Productos</Link>
-                    {categories.map(cat => <Link key={cat.id} className="nav-link m-1" to={`/category/${cat.id}`}>{cat.categorie}</Link>)}
-                    <Link className="nav-link m-1" to={'/cart'}><CartWidget/></Link>
+                    <NavLink className="nav-link m-1" to={'/'}>Home</NavLink>
+                    <NavLink className="nav-link m-1" to={'/products'}>Productos</NavLink>
+                    {categories.map(cat => <NavLink key={cat.id} className="nav-link m-1" to={`/category/${cat.id}`}>{cat.categorie}</NavLink>)}
+                    <NavLink className="nav-link m-1" to={'/cart'}><CartWidget/></NavLink>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

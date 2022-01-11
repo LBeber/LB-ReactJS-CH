@@ -1,11 +1,13 @@
 import React from 'react'
+import { Row } from 'react-bootstrap'
 import Item from '../Item/Item'
 
 const ItemList = ({productos}) => {
+
     return (
-        <div className="row justify-content-start align-items-start mt-2 col-12">
+        <Row className="justify-content-start align-items-start mt-2">
             {productos.map(p =><Item key={p.id} produc={p}/>)}
-        </div>
+        </Row>
     )
 }
 

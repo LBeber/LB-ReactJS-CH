@@ -10,9 +10,9 @@ const ItemDetail = ({productDetail}) => {
     
     const controlStock = (productDetail?.stock > 0)
         ?   `¡Quedan solo ${productDetail?.stock} unidades!`
-        :   `Lo sentimos, ya no quedan unidades :(`
+        :   `Ya no quedan unidades :(`
 
-    const{ addProduct } = useContext(CartContext)
+    const { addProduct } = useContext(CartContext)
     
     const sumarItem = (count) => {
         if (productDetail.stock >= count){

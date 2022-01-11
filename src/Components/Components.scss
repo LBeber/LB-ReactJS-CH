@@ -1,7 +1,8 @@
 @import '../Global/Scss/Fonts.scss';
 @import '../Global/Scss/Colors.scss';
 
-$rounded: 15px;
+$rounded: 0.5rem;
+$rounded-btn: 1000rem;
 
 .btn:focus-visible{
     outline: 0;
@@ -23,7 +24,7 @@ $rounded: 15px;
     width: 100%;
     border: 1px solid $primary-color;
     height: 2rem;
-    border-radius: 13px;
+    border-radius: $rounded-btn;
     background-color: $primary-color;
     color: #FFF;
 }
@@ -79,7 +80,7 @@ $rounded: 15px;
     justify-content: center;
     width: 100%;
     height: 2rem;
-    border-radius: 13px;
+    border-radius: $rounded-btn;
     transition: all .2s ease-out;
 }
 
@@ -183,7 +184,7 @@ $rounded: 15px;
 
 .checkOut{
     background-color: $primary-color;
-    border-radius: $rounded;
+    border-radius: $rounded-btn;
     border: none;
     padding: 0.5rem;
     width: 10rem;
@@ -195,10 +196,10 @@ $rounded: 15px;
 .removeAll{
     background-color: $background-color;
     color: $primary-color;
-    border-radius: $rounded;
+    border-radius: $rounded-btn;
     border: 1px solid $primary-color;
     padding: 0.5rem;
-    width: 10rem;
+    width: auto;
     font-size: 1rem;
     transition: all 0.2s ease-out;
 }
@@ -299,26 +300,96 @@ $rounded: 15px;
     }
 
     .idOrder{
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 500;
         margin-top: 2rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
 
     h6{
-        font-size: 2rem;
+        font-size: 1.3rem;
         font-weight: 500;
     }
 
     .btnGoHome{
-        margin-top: 1rem;
         @extend .checkOut;
+        margin-top: 1rem;
+        width: auto; 
+        padding-left: 1rem;
+        padding-right: 1rem;
         text-decoration: none;
         font-size: 1rem;
-        border-radius: 10rem;
-        padding: .8rem;
+        border-radius: $rounded-btn;
         transition: all 0.2s ease-out;
+    }
+    .btnSecondary{
+        @extend .removeAll;
+        margin-top: 1rem;
+        width: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
     
+.titlePage{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    text-transform:capitalize;
+}
+
+.bag{
+    display: flex;
+    flex-flow: row wrap;
+    height: 1rem;
+    p{
+        margin-left: .5rem;
+    }
+}
+
+.imgCart{
+    width: 10rem;
+    height: 10rem;
+    z-index: 1;
+}
+
+.bg_home{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    img{
+        width: 100%;
+  
+    }
+    .bg_cta{
+        display: flex;
+        position: absolute;
+        flex-flow: column;
+        top:20%;
+        left: 10%;
+        width: 25rem;
+        padding: 0;
+        align-items: center;
+
+        .btn_cta{
+            @extend .checkOut;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            width: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+}
+
+.NavBar{
+    box-shadow:
+        0px 1.1px 1.3px -24px rgba(0, 0, 0, 0.2),
+        0px 3px 3.6px -24px rgba(0, 0, 0, 0.154),
+        0px 7.2px 8.7px -24px rgba(0, 0, 0, 0.12),
+        0px 24px 29px -24px rgba(0, 0, 0, 0.082)
+    ;
+}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 const GoCart = () => {
-    
+
     return (
         <div className="row justify-content-center">
                 <Link className="btn my-1" id="viewProduct" to={'/'}>Ver mas productos</Link> 
@@ -36,6 +36,10 @@ const CountButton = ({cant, action}) => {
         return (count === cant) ?true :false
     }
 
+    if(cant === 0){
+        return <GoCart/>
+    }
+
     return(
         <div className='row justify-content-center align-items-center'>
             <div className="text-center col-10" id="cardCount"> 
@@ -51,8 +55,10 @@ const CountButton = ({cant, action}) => {
 }
 
 const ItemCount = ({cant, action, inputType = 'CountButton'}) => {
-
-    const Count = inputType === 'CountButton' ?CountButton :GoCart
+    
+    const Count = (inputType === 'CountButton') 
+                    ?CountButton 
+                    :GoCart
 
     return (
         <Count cant={cant} action={action}></Count>

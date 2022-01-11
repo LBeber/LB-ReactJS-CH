@@ -3,37 +3,31 @@ import { useParams } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import ItemCount from '../ItemCount/ItemCount'
-import {db} from '../../Services/Firebase/Firebase'
-import { getDoc, doc} from 'firebase/firestore'
+import {getItemById} from '../../Services/Firebase/Firebase'
+import { Row } from 'react-bootstrap'
 
 const ItemDetailContainer = () => {
     const [productDetail, setProductDetail] = useState([])
     const {productId} = useParams();
     
         useEffect(()=>{
+            
+            getItemById(productId).then(product =>{
+                setProductDetail(product)
+            }).catch(error => {
+                console.log(`${error}`);
+            })
 
-            ( async () => {
-
-                try{
-                    setProductDetail([])
-                    
-                        const getProductById = await getDoc(doc(db, 'products', productId))
-                        const productById = { id: getProductById.id, ...getProductById.data()}                        
-                        
-                        setProductDetail(productById)
-                   
-                } catch{
-                    console.log('Error en la consulta a la base de datos');
-                }finally{
-                    console.log('Consulta finalizada');
-                }
-                })()        
         },[productId])
 
+        if(productDetail.length === 0){
+            return <Loader/>
+        }
+
     return (
-            <div className='pt-5'>
-                {productDetail.length !== 0 ?<ItemDetail productDetail={productDetail} countType={ItemCount}/> :<Loader/> }
-            </div>
+            <Row className='mt-5'>
+                <ItemDetail productDetail={productDetail} countType={ItemCount}/>
+            </Row>
     )
 }
 

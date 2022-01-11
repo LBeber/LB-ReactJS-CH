@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import '../Components.scss';
 import CartContext from '../../Context/CartContext/CartContext'
 import { Bag } from 'react-bootstrap-icons';
+import { Col } from 'react-bootstrap';
 
 const CartWidget = () => {
 
@@ -11,10 +12,10 @@ const CartWidget = () => {
 
 
     return (
-        <div className="d-flex justify-content-center align-items-center">
-                <Bag/>
-                <p className="px-2 m-0">{cant}</p>
-        </div>
+        <Col className="bag">
+            <Col><Bag/></Col>
+            <p>{cant}</p>
+        </Col>
     )
 }
 
