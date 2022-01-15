@@ -25,22 +25,30 @@ export const UserContextProvider = ({children}) =>{
         setAddress(address)
     }
 
+    const resetForm = () =>{
+        setName(null)
+        setPhone(null)
+        setEmail(null)
+        setAddress(null)
+    }
+
     const changeNotification = (text) =>{
         setNotification(text)        
     }
 
     const user = {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    address: address
-                }
+        name: name,
+        phone: phone,
+        email: email,
+        address: address
+    }
 
     return(
         <UserContext.Provider
             value= {{
                 user,
                 notification,
+                resetForm,
                 changeNotification,
                 addName,
                 addPhone,

@@ -2,50 +2,76 @@ import React, { useState, useContext } from 'react'
 import '../Components.scss'
 import ItemCount from '../ItemCount/ItemCount';
 import CartContext from '../../Context/CartContext/CartContext'
+import { Col, Row } from 'react-bootstrap';
 
 
 const ItemDetail = ({productDetail}) => {
   
     const [typeCount, setTypeCount] = useState('CountButton')
-    
-    const controlStock = (productDetail?.stock > 0)
-        ?   `¡Quedan solo ${productDetail?.stock} unidades!`
-        :   `Ya no quedan unidades :(`
+   
+    const cant = (productDetail.cant === undefined)
+                    ?1
+                    :productDetail.cant
 
+    const [quantity, setQuantity] = useState(cant)
     const { addProduct } = useContext(CartContext)
     
-    const sumarItem = (count) => {
-        if (productDetail.stock >= count){
-            let subTotal = productDetail.precio * count
-            const value = {...productDetail, cant: count, subTotal}
-            productDetail.stock = productDetail.stock - count
-            addProduct(value)
-            setTypeCount('GoCart')
-        }
+    const controlStock = (productDetail?.stock > 0)
+    ?   `¡Quedan solo ${productDetail?.stock} unidades!`
+    :   `Ya no quedan unidades :(`
+
+   
+    const addToCart = () => {   
+    if (productDetail.stock >= quantity){
+        let updateCant = quantity
+        const value = {...productDetail, cant: updateCant}
+        addProduct(value)
+        setTypeCount('GoCart')
+    }
+    }
+
+    const addOne = () => {
+    if (productDetail.stock > quantity){
+        setQuantity(quantity + 1)
+    }
+    }
+   
+    const restOne = () => {
+    if (quantity > 0){
+        setQuantity(quantity - 1)
+    }
     }
 
     return (
-        <div className="itemDetail py-3">
-            <div className="col-12 row justify-content-center">
-                    <div className="col-12 col-sm-12 col-lg-6">
-                        <img src={productDetail?.img} alt="" className="img-fluid"/>
-                    </div>
-                    <div className="col-12 col-sm-12 col-lg-6 mt-sm-3 mt-lg-0 row">
-                        <div className='col-12 col-sm-12 col-lg-6'>
-                            <h3>{productDetail?.nombre}</h3>
-                            <h1>${(productDetail?.precio).toFixed(2)}</h1>
-                            <small className="fst-italic">{controlStock}</small>
-                        </div>
-                        <div className="col-12 col-sm-12 col-lg-6 mt-sm-3 mt-lg-3">
-                            <ItemCount action={sumarItem} cant={productDetail?.stock} inputType={typeCount}/>
-                        </div>
-                        <div className="col-12 justify-content-center">
-                             <h5>Detalles:</h5>
-                             <p>{productDetail?.descrip}</p>
-                        </div>
-                    </div>
-            </div>
-        </div>
+        <Row className="itemDetail py-3">
+            <Col lg="6">
+                <img src={productDetail?.img} alt="" className="img-fluid"/>
+            </Col>
+            <Col lg="6" className="mt-sm-3 mt-lg-0">
+                <Row>
+                <Col lg="6">
+                    <h3>{productDetail?.nombre}</h3>
+                    <h1>$ {(productDetail?.precio).toFixed(2)}</h1>
+                    <small className="fst-italic">{controlStock}</small>
+                </Col>
+                <Col lg="6" className='itemCountDetail'>
+                    <ItemCount
+                        add={() => addOne()} 
+                        rest={() => restOne()} 
+                        cant={quantity}
+                        inputType={typeCount}
+                        action={()=>addToCart()}
+                        stock={productDetail?.stock}
+                        />
+                </Col>
+                </Row>
+                <Col lg="12" className='mt-5'>
+                    <h5>Detalles:</h5>
+                    <p>{productDetail?.descrip}</p>
+                </Col>
+                
+            </Col>
+        </Row>
     )
 }
 

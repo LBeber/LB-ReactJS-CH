@@ -7,39 +7,63 @@ export const CartContextProvider = ({children}) => {
     const [addItem, setAddItem] = useState([])
     const [total, setTotal] = useState(0)
     const [orderState, setOrderState] = useState(false)
-
     
-
+    
     const addProduct = (item) => {
-        
-        if(!checkIsAdded(item.id)){
+    
+        if(checkIsAdded(item)){
+
             addItem.forEach((i, val) => {
-                
                 if (i.id === item.id){
-                    addItem[val].cant = i.cant + item.cant
+                    addItem[val].cant = item.cant
+                    addItem[val].subTotal = i.precio * item.cant
                     setAddItem([...addItem])
                 }
             })
+
         }
         else{
+            item.subTotal = item.precio * item.cant
             setAddItem([...addItem, item])
         }        
     }
     
-    const checkIsAdded = (id) =>{       //Comprueba si existe un producto para solo agregar la cantidad
-        const isAdded = addItem.find(producto => producto.id === id  )
-        return isAdded === undefined ?true :false
+    const checkIsAdded = (item) =>{       //Comprueba si existe un producto para solo agregar la cantidad
+        const isAdded = addItem.find(producto => producto.id === item.id)
+        
+        if(isAdded !== undefined){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    const getCantInCart = (product) => {
+        return new Promise((resolve, reject) =>{
+            const isInCart = addItem.find((productInCart) => productInCart.id === product.id)
+            if(isInCart !== undefined){
+                resolve(isInCart)
+            }
+            else{
+                resolve(product)
+            }
+        })
     }
 
     const deleteProduct = (id) => {
         const removed = addItem.filter((producto) => producto.id !== id)
         setAddItem(removed)
         setTotal(removed.cant)
-        }
+    }
 
-    const cantTotal = (/* addItem */) => {
-        let cant = addItem ?addItem.length : null
-        return cant
+    const cantTotal = () => {
+        let quantity = 0
+
+        addItem.forEach(({cant}) =>{
+            quantity = quantity + cant
+        })
+
+        return quantity
     }
 
     const deleteAll = () => {
@@ -57,6 +81,7 @@ export const CartContextProvider = ({children}) => {
     }
 
     const order = (value) =>{
+     
         setOrderState(value)
     }
     
@@ -67,6 +92,7 @@ export const CartContextProvider = ({children}) => {
                 total,
                 addItem,
                 orderState,
+                getCantInCart,
                 order,
                 cantTotal,
                 getTotalPrice,

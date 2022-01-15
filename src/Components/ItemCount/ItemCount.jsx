@@ -1,67 +1,46 @@
-import React, {useState} from 'react'
+import React from 'react'
 import '../Components.scss'
 import { Link } from 'react-router-dom'
+import { Col } from 'react-bootstrap'
+
 
 
 const GoCart = () => {
 
     return (
-        <div className="row justify-content-center">
-                <Link className="btn my-1" id="viewProduct" to={'/'}>Ver mas productos</Link> 
-            <div className='text-center goCart col-8'>
-                <Link className="btn my-1" id="goCart" to={'/cart'}>Ir al carrito</Link>
-            </div>
-        </div>
+    <div>
+        <Link className="btn my-1" id="viewProduct" to={'/'}>Ver mas productos</Link> 
+        <Link className="btn my-1" id="goCart" to={'/cart'}>Ir al carrito</Link>
+    </div>
     )
 }
 
-
-const CountButton = ({cant, action}) => {
-
-    const [count, setCount] = useState(1)
-    
-    const addOne = () => {
-        if (count < cant){
-            setCount(count + 1);
-        }
-    }
-
-    const restOne = () => {
-        if (count > 0){
-            setCount(count - 1)
-        }
-    }
-
-    const stop = (cant) => {
-        return (count === cant) ?true :false
-    }
-
-    if(cant === 0){
-        return <GoCart/>
-    }
+export const CountButton = ({rest, add, cant}) => {
 
     return(
-        <div className='row justify-content-center align-items-center'>
-            <div className="text-center col-10" id="cardCount"> 
-                <button className="btn mx-2 p-0 cardButton rounded-circle" onClick={restOne} disabled={stop(1)}>-</button>
-                    <label className="m-0 p-0 text-center col-4">{count}</label>
-                <button className="btn mx-2 p-0 cardButton rounded-circle" onClick={addOne} disabled={stop(cant)}>+</button>
-            </div>
-            <div className="justify-content-center col-8 mt-1">
-                <button className="btn p-0" id="addCart" onClick={() => action(count)}>Agregar al carrito</button>
-            </div>
-        </div>
+   
+    <Col className="text-center" id="cardCount"> 
+        <button className="p-0 btn cardButton" onClick={rest}>-</button>
+            <label className="p-0 text-center">{cant}</label>
+        <button className="p-0 btn cardButton" onClick={add}>+</button>
+    </Col>
+   
     )
 }
 
-const ItemCount = ({cant, action, inputType = 'CountButton'}) => {
+const ItemCount = ({rest, add, action, cant, stock,inputType}) => {
     
-    const Count = (inputType === 'CountButton') 
-                    ?CountButton 
-                    :GoCart
+    if(inputType !== 'CountButton' || stock === 0){
+        return(
+            <GoCart />
+        )
+    }
 
     return (
-        <Count cant={cant} action={action}></Count>
+        <div className="text-center" id="cardCount">
+            <CountButton rest={rest} add={add} cant={cant}/>
+            <button className="btn my-2" id="addCart" onClick={action}>Agregar al carrito</button>
+        </div>
     )
 }
 

@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import FrontPage from '../FrontPage/FrontPage';
 import ItemListContainer from '../ItemListContainer/ItemListContainer';
 
-export const Home = () => {
+const Home = () => {
     return (
         <Container className='mt-4'>
             <FrontPage/> 
@@ -11,3 +11,5 @@ export const Home = () => {
         </Container>
     )
 }
+
+export default Home

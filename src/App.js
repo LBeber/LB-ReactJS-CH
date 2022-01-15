@@ -2,10 +2,11 @@ import './App.css';
 import NavBar from './Components/NavBar/Navbar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
+import Cart from './Components/Cart/Cart'
+import Home from './Components/Home/Home';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { CartContextProvider } from './Context/CartContext/CartContext';
-import Cart from './Components/Cart/Cart'
-import { Home } from './Components/Home/Home';
+import Footer from './Components/Footer/Footer';
 
 function App() {
 
@@ -27,7 +28,10 @@ function App() {
                 <Route exact path='/cart/' element={<Cart/>} />     
               </Routes> 
             </div> 
-            </div>
+          </div>
+          <div className='container-fluid containerFooterPage'>
+          <Footer/>
+          </div>
         </Router>
       </CartContextProvider>
   </div>

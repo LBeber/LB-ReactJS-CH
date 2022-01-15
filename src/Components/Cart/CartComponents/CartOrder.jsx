@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../../Components.scss'
 import CartContext from '../../../Context/CartContext/CartContext'
@@ -7,19 +7,20 @@ import { Col, Row } from 'react-bootstrap';
 
 
 const DataOrderDetail = () =>{
-    const { notification, changeNotification} = useContext(UserContext)
+    const { notification, changeNotification, resetForm} = useContext(UserContext)
     const { order } = useContext(CartContext)
     
     const navigate = useNavigate()
 
     const goHome = (link) =>{
+        resetForm()
         navigate(`${link}`)
         changeNotification('')
         order(false)
     }
     
     return(
-        <Row className='order'>
+        <Row className='order my-5'>
             <Col sm="8" className='orderDetails'>
                 <h6>¡Ya estamos trabajando en tu pedido!</h6>
                 <Col className='descripOrder'>

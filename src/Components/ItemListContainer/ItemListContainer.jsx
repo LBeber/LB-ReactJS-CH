@@ -6,7 +6,6 @@ import { getItems } from '../../Services/Firebase/Firebase'
 import { useParams } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 
-
 const ItemListContainer = () => {
 
     const[productos, setProductos] = useState([])
@@ -14,11 +13,11 @@ const ItemListContainer = () => {
 
     useEffect(() =>{
         
-        getItems('categoria', '==', categoryId).then(products =>{
-            setProductos(products)
-        }).catch(error => {
-            console.log(`${error}`);
-        })
+    getItems('categoria', '==', categoryId).then(products =>{
+        setProductos(products)
+    }).catch(error => {
+        console.log(`${error}`);
+    })
 
     },[categoryId])
     

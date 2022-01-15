@@ -18,7 +18,7 @@ const CartEmpty = () =>{
     }
     
     return(
-        <Row className='order'>
+        <Row className='order mb-5'>
             <Col sm="8" className='orderDetails'>
                 <h6>No hay productos en el carrito</h6>
                 <Col className='descripOrder'>

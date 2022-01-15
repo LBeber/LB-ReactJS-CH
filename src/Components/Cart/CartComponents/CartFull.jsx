@@ -18,7 +18,7 @@ const CartFull = () =>{
     }
 
     return (
-        <Row className='cart'>
+        <Row className='cart mb-5'>
             <Col sm="6" className='titleCart'>
                 <p>Detalle del carrito<Bag className='ms-2'/></p>
                 {addItem.map(item=><CartItem key={item.id} CartDetail={item}/>)}

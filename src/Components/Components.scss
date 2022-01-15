@@ -4,17 +4,6 @@
 $rounded: 0.5rem;
 $rounded-btn: 1000rem;
 
-.btn:focus-visible{
-    outline: 0;
-    box-shadow: 0;
-}
-
-.btn-check:focus+.btn, 
-.btn:focus {
-    outline: 0;
-    box-shadow: none; 
-}
-
 .logo{
     width: 10rem;
 }
@@ -51,6 +40,11 @@ $rounded-btn: 1000rem;
     border: 1px solid $primary-color;
 }
 
+#addCart:focus{
+    outline: 0;
+    box-shadow: none;
+}
+
 #goCart:hover,
 #viewProduct:hover,
 #addCart:hover
@@ -62,14 +56,6 @@ $rounded-btn: 1000rem;
     width: 12rem;
     height: 20rem;
     border: 1px solid $primary-color;
-}
-
-.cardButton{
-    color: $primary-color;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid $primary-color;
-    transition: all .1s ease-in-out;
 }
 
 #goCart, #viewProduct, #addCart
@@ -84,10 +70,6 @@ $rounded-btn: 1000rem;
     transition: all .2s ease-out;
 }
 
- 
-.cardButton:hover{
-    border: 1px solid $primary-color;
-}
 
 .cardItem{
     border-radius: $rounded;
@@ -105,12 +87,6 @@ $rounded-btn: 1000rem;
             font-weight: 500;
         }
     } 
-}
-
-.ItemCount{
-    height: 0;
-    transform: scaleY(0);
-    transition: all 0.2s ease-out;
 }
 
 .cardItem:hover{
@@ -211,8 +187,6 @@ $rounded-btn: 1000rem;
     align-items: center;
     text-align: center;
     height: 5em;
-    position: absolute;
-    left: 0;
     background-color: $background-color;
     bottom: .5rem;              
 }
@@ -392,4 +366,86 @@ $rounded-btn: 1000rem;
         0px 7.2px 8.7px -24px rgba(0, 0, 0, 0.12),
         0px 24px 29px -24px rgba(0, 0, 0, 0.082)
     ;
+}
+
+.itemCountDetail{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    height: auto;
+}
+
+#cardCount{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .cardButton{
+        font-size: 2rem;
+        font-weight: 300;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        color: $primary-color;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 1000rem;      
+    }
+    .cardButton:focus{
+        outline: 0;
+        box-shadow: none;
+    }
+    label{
+        font-size: 1.2rem;
+    }
+}
+
+input[type=text]:focus,
+input[type=email]:focus{
+    outline: 0;
+    box-shadow: none;
+    border-bottom: 1px solid $primary-color
+}
+
+input[type=text],
+input[type=email]{
+    border-radius: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
+    .footerPage{
+    width: 100%;
+
+    .footerSection{
+        padding: 3rem;
+        
+        h6{
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        ul 
+        {
+            padding-left: .6rem;
+            
+            li{
+                list-style: none;
+                margin-top: 0.2rem;
+            }
+        }
+    }
+}
+.containerFooterPage{
+    background-color: #FFF;
+    box-shadow:
+    0px -1.1px 1.3px -24px rgba(0, 0, 0, 0.2),
+    0px -3px 3.6px -24px rgba(0, 0, 0, 0.154),
+    0px -7.2px 8.7px -24px rgba(0, 0, 0, 0.12),
+    0px -24px 29px -24px rgba(0, 0, 0, 0.082)
 }

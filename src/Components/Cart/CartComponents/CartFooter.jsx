@@ -3,7 +3,8 @@ import '../../Components.scss'
 import CartContext from '../../../Context/CartContext/CartContext'
 import UserContext from '../../../Context/UserContext/UserContext';
 import { updateProduct } from '../../../Services/Firebase/Firebase'
-import CartOrder from './CartOrder';
+import { Col, Row } from 'react-bootstrap';
+
 
 const CartFooter = () =>{
 
@@ -18,55 +19,59 @@ const CartFooter = () =>{
     }  
 
     const checkData = Object.values(user).every(value => {
-        if(value !== null){
-            return true
-        }    
-        else{
-            return false
-        }
+
+    if(value === null || value === ''){
+        return false
+    }    
+    else{
+        return true
+    }
+
     })
     
     const checkOut = () =>{
         
-        if (checkData){
-            orderConfirm()
-        }
-        else{
-            let alert = 'Debe completar los datos de envío'
-            changeNotification(alert)
-        }
+    if (checkData){
+        orderConfirm()
+    }
+    else{
+        let alert = 'Debe completar los datos de envío'
+        changeNotification(alert)
+    }
+
     }
 
     const orderConfirm = () =>{
 
-        const getDataCart =
-            {
-                buyer: user,
-                items: addItem,
-                total: precioTotal
-            }     
-        
-        updateProduct(getDataCart, addItem).then(idOrder =>{
-            changeNotification(idOrder);
-            order(true)
-            deleteAll()
-        })
+    const getDataCart =
+        {
+            buyer: user,
+            items: addItem,
+            total: precioTotal
+        }     
+    
+    updateProduct(getDataCart, addItem).then(idOrder =>{
+        changeNotification(idOrder);
+        order(true)
+        deleteAll()
+    })
+
     }
 
     return (
-        <div className='row col-12'>
-            <div className='footerCartBg'>
-                <div className='col-2 removeAllDiv'>         
+        <Row className='row col-12 mt-5'>
+            <Col className='footerCartBg'>
+                <Col sm='2' className='removeAllDiv'>         
                     <button className='removeAll' onClick={() => removeAll()}>Vaciar carrito</button>
-                </div>
-                <div className='footerCartPrice col-4'>
+                </Col>
+                <Col sm='4' className='footerCartPrice'>
                     <h3>{precioTotal}</h3>
-                </div>
-                <div className='col-2 checkOutDiv'>         
+                </Col>
+                <Col sm='2' className='checkOutDiv'>         
                     <button className='checkOut' onClick={() => checkOut()}>Finalizar compra</button>
-                </div>  
-            </div>
-        </div>
+                </Col>  
+            </Col>
+        </Row>
         
     )
 }
