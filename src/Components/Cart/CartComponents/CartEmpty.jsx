@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../../Components.scss'
 import UserContext from '../../../Context/UserContext/UserContext';
@@ -10,7 +10,12 @@ const CartEmpty = () =>{
         
     const navigate = useNavigate()
     
-    changeNotification('¡Mirá los productos recién llegados!')
+
+    useEffect(() => {
+        
+        changeNotification('¡Mirá los productos recién llegados!')
+        
+    }, [changeNotification])
 
     const goHome = (link) =>{
         navigate(link)
